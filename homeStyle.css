@@ -1,6 +1,11 @@
 .home-header {
-    font-size: 6rem;
-    margin-top: 12rem;
-    padding: 3rem;
+    margin-top: 9rem;
+    width: 100%;
 }
 
+
+
+.search-bar {
+    width: 80%;
+    margin: auto;
+}
