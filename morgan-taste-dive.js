@@ -1,6 +1,4 @@
-
-
-// MORGAN'S CODE, PLS DONT TOUCH ----------------------
+// MORGAN'S CODE, PLS DONT TOUCH
 // var apiKey = 391053-Musicolo-DLE4BMNM
 
 var similarArray = [0, 1, 2];
@@ -8,7 +6,7 @@ var similarArray = [0, 1, 2];
 $(document).on('keypress',function(e) {
     if(e.which == 13) {
         
-        var artistName = encodeURIComponent($('#artist-input').val().toLowerCase());
+        var artistName = encodeURIComponent($('.search').val().toLowerCase());
         var tasteDive = 'https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?q=' + artistName + '&type=music&k=391053-Musicolo-DLE4BMNM';
         
         $.ajax({
@@ -26,6 +24,3 @@ $(document).on('keypress',function(e) {
 
     }
 });
-
-// -------------------------------------------------------------
-// Please add your final working code below and section it off
