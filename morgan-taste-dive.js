@@ -1,7 +1,5 @@
 // MORGAN'S CODE, PLS DONT TOUCH
 // var apiKey = 391053-Musicolo-DLE4BMNM
-// var artistName = $('.search').val();
-// var tasteDive = 'https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?q=' + artistName + '&type=music&k=391053-Musicolo-DLE4BMNM';
 
 var similarArray = [0, 1, 2];
 
