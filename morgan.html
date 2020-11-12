@@ -8,19 +8,19 @@
     <title>Musicology</title>
 </head>
 <body>
-    
+    <!-- top left header -->
     <div class="container"> 
 
         <div class="row">
 
-            <div class="col-3">
+            <div class="col-3 top-left">
 
                 <div class="row">
-                    <h1 class="float-left musicology">Musicology</h1>
+                    <a href="home.html"><img class="float-left musicology" src="musicology-logo-light.png" alt="musicology"></a>
                 </div>
 
                 <div class="row">
-                    <input id="artist-input" type="text" placeholder="Search" class="search form-control col-10">
+                    <input id="artist-input" type="text" placeholder="Search" class="form-control col-11 search">
                 </div>
                 
             </div>
@@ -30,7 +30,7 @@
                 <div class="row">
                     <div class="jumbotron jumbotron-fluid col-12">
                         <div class="container">
-                          <h1 id="artist-name" class="display-4">Artist Name</h1>
+                          <h1 id="artist-name" class="artist-name display-4">Artist Name</h1>
                         </div>
                     </div>
                 </div>
@@ -40,15 +40,17 @@
         </div> 
 
         <div class="row">
+
             <!-- Similar Artists Cards on the left sidebar -->
             <div class="col-3">
+
                 <div class="row">
                     <h5>Check Out Similar Artists</h5>
                 </div>
                 <div class="row">
                     <div class="col mb-4 card-border">
                         <div class="card sim-artist-card">
-                            <img id="sim-artist-img-0" class="card-img-top" alt="...">
+                            <img id="sim-artist-img-0" src="https://via.placeholder.com/100" class="card-img-top" alt="...">
                             <a class="card-title-0" href="">Artist Name</a>
                         </div>
                     </div>
@@ -56,7 +58,7 @@
                 <div class="row">
                     <div class="col mb-4 card-border">
                         <div class="card sim-artist-card">
-                            <img id="sim-artist-img-1" class="card-img-top" alt="...">
+                            <img id="sim-artist-img-1" src="https://via.placeholder.com/100" class="card-img-top" alt="...">
                             <a class="card-title-1" href="">Artist Name</a>
                         </div>
                     </div>
@@ -64,7 +66,7 @@
                 <div class="row">
                     <div class="col mb-4 card-border">
                         <div class="card sim-artist-card">
-                            <img id="sim-artist-img-2" class="card-img-top" alt="...">
+                            <img id="sim-artist-img-2" src="https://via.placeholder.com/100" class="card-img-top" alt="...">
                             <a class="card-title-2" href="">Artist Name</a>
                         </div>
                     </div>
@@ -86,11 +88,13 @@
                           <a class="nav-link" id="social-tab" data-toggle="tab" href="#social" role="tab" aria-controls="social" aria-selected="false">Social</a>
                         </li>
                       </ul>
-                      <!-- only use IDs below for tab content -->
+                      <!-- TAB CONTENT: only use IDs below for tab content -->
                       <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="discography" role="tabpanel" aria-labelledby="discography-tab">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae dolorum, vero at dolore expedita veniam beatae id aut assumenda eaque modi perspiciatis, tempore magnam corrupti. Dolorum suscipit doloremque ut numquam! Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde asperiores laborum et excepturi ipsam eveniet, tempore ducimus cumque. Suscipit veritatis at iste quod ipsum! Ipsum nostrum itaque sed vero voluptatem.</div>
                         <div class="tab-pane fade" id="upcoming-events" role="tabpanel" aria-labelledby="upcoming-events-tab">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae dolorum, vero at dolore expedita veniam beatae id aut assumenda eaque modi perspiciatis, tempore magnam corrupti. Dolorum suscipit doloremque ut numquam! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis debitis porro sed animi dicta alias repellat aut quos facere quo eum voluptas odio, hic repudiandae, autem dolorum? Perferendis, commodi ad.</div>
-                        <div class="tab-pane fade" id="social" role="tabpanel" aria-labelledby="social-tab">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae dolorum, vero at dolore expedita veniam beatae id aut assumenda eaque modi perspiciatis, tempore magnam corrupti. Dolorum suscipit doloremque ut numquam! Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, similique fugiat, illo aut optio earum, dolorem voluptates quis dolores mollitia tempore neque nostrum incidunt consequatur quo tempora iure dolor accusantium?</div>
+                        <div class="tab-pane fade" id="social" role="tabpanel" aria-labelledby="social-tab">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae dolorum, vero at dolore expedita veniam beatae id aut assumenda eaque modi perspiciatis, tempore magnam corrupti. Dolorum suscipit doloremque ut numquam! Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, similique fugiat, illo aut optio earum, dolorem voluptates quis dolores mollitia tempore neque nostrum incidunt consequatur quo tempora iure dolor accusantium?
+                            <img id="fb-logo" src="" alt="">
+                        </div>
                       </div>
                 </div>
                 
@@ -104,6 +108,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
     <script src="morgan-API-testing.js"></script>
+
 
 </body>
 </html>

@@ -1,6 +1,6 @@
 
 
-// MORGAN'S CODE, PLS DONT TOUCH ----------------------
+// MORGAN'S CODE, PLS DONT TOUCH -----------------------------------------------------------
 // var apiKey = 391053-Musicolo-DLE4BMNM
 
 var similarArray = [0, 1, 2];
@@ -58,5 +58,39 @@ $(document).on('keypress',function(e) {
     }
 });
 
-// -------------------------------------------------------------
+
+// Ajax call to Bandsintown
+$(document).on('keypress',function(e) {
+    if(e.which == 13) {
+        var artist = encodeURIComponent($('.search').val().toLowerCase());
+        var queryURL = "https://rest.bandsintown.com/artists/" + artist + "?app_id=codingbootcamp";
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function(response) {
+            console.log(response);
+            // Getting and pasting artist name into Jumbotron
+            $("#artist-name").text(response.name);
+            
+             // if artist has a fb page, a clickable fb icon will appear in the social tab and redirects you in a new tab
+            if (response.facebook_page_url === '') {
+                console.log('no fb link');
+                return;
+            }
+            else {
+                var fbURL = response.facebook_page_url;
+                console.log(fbURL);
+                $('#fb-logo').attr({
+                    src:'imgs/fb-logo.jpg',
+                    width: 120,
+                    height: 120
+                });
+                $('#fb-logo').wrap($('<a />').attr({href:fbURL, target:'_blank'})).parent();
+                console.log(fbLogo)
+                $('#social').append(fbLogo);
+            }
+        });
+    }
+});
+// ----------------------------------------------------------------------------------------------
 // Please add your final working code below and section it off
