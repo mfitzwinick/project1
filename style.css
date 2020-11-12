@@ -1,10 +1,16 @@
 .musicology {
-    font-size: 3rem;
-    margin: 2rem 2rem 2rem 0rem;
+    width: 100%;
+    padding-bottom: 1rem;
 }
 
-.search {
-    margin: 0rem 1rem 1rem 0rem;
+.top-left {
+padding: 2rem 2rem 0rem 0rem;
+}
+
+.artist-name {
+    font-size: 4rem;
+    font-weight: 900;
+    color: white;
 }
 
 .tab-content {
