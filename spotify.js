@@ -25,7 +25,7 @@ var lastTokenTime = localStorage.getItem("token-time")
 var timeDiff = parseInt(nowTime) - parseInt(lastTokenTime);
 
 //compare nowTime to last
-if(timeDiff > 1 || timeDiff <= 0 || lastTokenTime === null) {
+if(timeDiff >= 1 || timeDiff <= 0 || lastTokenTime === null) {
     getToken();
 }
 
@@ -101,7 +101,7 @@ $(document).on('keypress',function(e) {
                 }
             });
 
-            //ajax call to get artist's top tracks
+            //ajax call to get artist's top 10 tracks
             var queryURL13 = "https://api.spotify.com/v1/artists/" + correctResultID + "/top-tracks?country=US";
             $.ajax({
                 crossDomain: true,
@@ -112,7 +112,7 @@ $(document).on('keypress',function(e) {
                 console.log(response)
             });
 
-            //ajax call to get artist's related artists
+            //ajax call to get artist's top 3 most popular related artists
             var queryURL14 = "https://api.spotify.com/v1/artists/" + correctResultID + "/related-artists";
             $.ajax({
                 crossDomain: true,
@@ -121,6 +121,25 @@ $(document).on('keypress',function(e) {
                 method: "GET"
             }) .then(function(response) {
                 console.log(response)
+                for(var i = 0; i < 3; i++) {
+                    //uncompleted code to sort related artist list by popularity
+                    // var relArtists = [response.artists[i]]
+                    // console.log(relArtists)
+                    // console.log(responseArtistsI.sort(function(a,b) {
+                    //     return a.popularity - b.popularity
+                    // }));
+
+                    //changes domElem text to name of related artist
+                    var simArtistName = response.artists[i].name;
+                    var domElem = $('.card-title-'+ i);
+                    domElem.text(simArtistName);
+
+                    //changes imgAttr to src of related artist
+                    var simArtistImg = response.artists[i].images[0].url
+                    console.log(simArtistImg)
+                    $(".img" + i).attr("src", simArtistImg)
+
+                };
             });
         }); 
     };
