@@ -110,6 +110,8 @@
 //             $('.card-img-top').attr('src', simImg);
 //         });
 
+
+// Ajax call to Bandsintown
 $(document).on('keypress',function(e) {
     if(e.which == 13) {
         var artist = encodeURIComponent($('.search').val().toLowerCase());
@@ -119,9 +121,10 @@ $(document).on('keypress',function(e) {
             method: "GET"
         }).then(function(response) {
             console.log(response);
-
+            // Getting and pasting artist name into Jumbotron
             $("#artist-name").text(response.name);
             
+             // if artist has a fb page, a clickable fb icon will appear in the social tab and redirects you in a new tab
             if (response.facebook_page_url === '') {
                 console.log('no fb link');
                 return;
@@ -129,11 +132,12 @@ $(document).on('keypress',function(e) {
             else {
                 var fbURL = response.facebook_page_url;
                 console.log(fbURL);
-                $('#fb-logo').attr('src', 'imgs/fb-logo.jpg');
-
-                // var fbLink = $('<a>').attr('href', fbURL).parent();
-                //fbLink.text("Click Me")
-                $('#fb-logo').wrap($('<a />').attr('href',fbURL)).parent();
+                $('#fb-logo').attr({
+                    src:'imgs/fb-logo.jpg',
+                    width: 120,
+                    height: 120
+                });
+                $('#fb-logo').wrap($('<a />').attr({href:fbURL, target:'_blank'})).parent();
                 console.log(fbLogo)
                 $('#social').append(fbLogo);
             }
