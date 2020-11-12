@@ -10,7 +10,7 @@ $(document).on('keypress',function(e) {
         var tasteDive = 'https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?q=' + artist + '&type=music&k=391053-Musicolo-DLE4BMNM';
         
         var urlArray = [];
-        var imgArray = [];
+        // var imgArray = [];
 
         $.ajax({
             url: tasteDive,
@@ -28,33 +28,48 @@ $(document).on('keypress',function(e) {
                 urlArray.push(simImgURL);
             }
 
-            for (item of urlArray) {
-                var fetchImg = item;
-                $.ajax({
-                    url: fetchImg,
-                    method: "GET"
-                }).then(function(res) {
-                    console.log(res.image_url);
-                    var simImg = res.image_url;
-                    var domImg = $('#sim-artist-img-'+ urlArray.indexOf(item));
-                    console.log(domImg);
-                    domImg.attr('src', simImg);
-                    imgArray.push(simImg);
-                    console.log(imgArray);
-                });
-            }
+            $.ajax({
+                url: urlArray[0],
+                method: "GET",
+            }).then(function(res) {
+                $('#sim-artist-img-0').attr('src', res.image_url);
+            });
 
-            // for (cat of imgArray) {
-            //     var domImg = $('#sim-artist-img-'+ imgArray.indexOf(cat));
-            //     console.log(domImg);
-            //     domImg.attr('src', cat);
-            // }
-            
+            $.ajax({
+                url: urlArray[1],
+                method: "GET",
+            }).then(function(res) {
+                $('#sim-artist-img-1').attr('src', res.image_url);
+            });
+
+            $.ajax({
+                url: urlArray[2],
+                method: "GET",
+            }).then(function(res) {
+                $('#sim-artist-img-2').attr('src', res.image_url);
+            });
         });
-
     }
 });
 
+
+
+            // for (item of urlArray) {
+            //     var fetchImg = item;
+            //     $.ajax({
+            //         url: fetchImg,
+            //         method: "GET"
+            //     }).then(function(res) {
+            //         console.log(res.image_url);
+            //         var simImg = res.image_url;
+            //         var domImg = $('#sim-artist-img-'+ urlArray.indexOf(item));
+            //         console.log(domImg);
+            //         domImg.attr('src', simImg);
+            //         imgArray.push(simImg);
+            //         console.log(imgArray);
+            //     });
+            // }
+    
 
 // --------------------------------- BANDSINTOWN---------------
 
