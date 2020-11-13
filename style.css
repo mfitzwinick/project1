@@ -59,6 +59,7 @@
 @media (min-width: 992px) {
     .similar-bottom-responsive {display: none;}
     .navbar {display:none;}
+}
 
  .popular {
     visibility: hidden;
