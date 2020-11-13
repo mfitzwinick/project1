@@ -59,21 +59,21 @@ $(document).on('keypress',function(e) {
                 url: urlArray[0],
                 method: "GET",
             }).then(function(res) {
-                $('#sim-artist-img-0').attr('src', res.image_url);
+                $('.sim-artist-img-0').attr('src', res.image_url);
             });
 
             $.ajax({
                 url: urlArray[1],
                 method: "GET",
             }).then(function(res) {
-                $('#sim-artist-img-1').attr('src', res.image_url);
+                $('.sim-artist-img-1').attr('src', res.image_url);
             });
 
             $.ajax({
                 url: urlArray[2],
                 method: "GET",
             }).then(function(res) {
-                $('#sim-artist-img-2').attr('src', res.image_url);
+                $('.sim-artist-img-2').attr('src', res.image_url);
             });
             
         });
@@ -84,7 +84,7 @@ $(document).on('keypress',function(e) {
 // Ajax call to Bandsintown
 $(document).on('keypress',function(e) {
     if(e.which == 13) {
-        var artist = encodeURIComponent($('.search').val().toLowerCase());
+        var artist = encodeURIComponent($('#search-nav').val().toLowerCase());
         var artistReg = encodeURIComponent($('#search-reg').val().toLowerCase());
         if(artist === "") {
             artist = artistReg;
