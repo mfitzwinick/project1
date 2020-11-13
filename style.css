@@ -40,3 +40,7 @@
 .albums {
     visibility: hidden;
 }
+
+.card-border {
+    visibility: hidden;
+}

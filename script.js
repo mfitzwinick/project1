@@ -20,7 +20,7 @@ $(document).on('keypress',function(e) {
             url: tasteDive,
             method: 'GET'
         }).then(function(response) {
-            console.log(response);
+            // console.log(response);
             // Pasting the similar artists name to each dom element
             for (elem of similarArray) {
                 var simArtist = response.Similar.Results[elem].Name;
@@ -62,13 +62,14 @@ $(document).on('keypress',function(e) {
 // Ajax call to Bandsintown
 $(document).on('keypress',function(e) {
     if(e.which == 13) {
+        $(".card-border").css("visibility", "visible");
         var artist = encodeURIComponent($('.search').val().toLowerCase());
         var queryURL = "https://rest.bandsintown.com/artists/" + artist + "?app_id=codingbootcamp";
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function(response) {
-            console.log(response);
+            // console.log(response);
             // Getting and pasting artist name into Jumbotron
             $("#artist-name").text(response.name);
             
