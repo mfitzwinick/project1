@@ -13,6 +13,9 @@
 //     }
 // })
 
+
+
+
 // MORGAN'S CODE, PLS DONT TOUCH -----------------------------------------------------------
 // var apiKey = 391053-Musicolo-DLE4BMNM
 
@@ -94,10 +97,15 @@ $(document).on('keypress',function(e) {
             console.log(response);
             // Getting and pasting artist name into Jumbotron
             $("#artist-name").text(response.name);
+
+            // setting jumbotron artist background
+            var jumboImg = response.image_url;
+            console.log(jumboImg);
+            $('.jumbotron-image').attr('style', 'background-image:' + "url(" + jumboImg + ")");
             
              // if artist has a fb page, a clickable fb icon will appear in the social tab and redirects you in a new tab
             if (response.facebook_page_url === '') {
-                console.log('no fb link');
+                console.log('No Facebook link available');
                 return;
             }
             else {
@@ -111,6 +119,47 @@ $(document).on('keypress',function(e) {
                 $('#fb-logo').wrap($('<a />').attr({href:fbURL, target:'_blank'})).parent();
             }
         });
+    }
+});
+
+
+
+// Linking artists Twitter
+
+$(document).on('keypress',function(e) {
+    if(e.which == 13) {
+        var artist = encodeURIComponent($('.search').val().toLowerCase());
+        var artistReg = encodeURIComponent($('#search-reg').val().toLowerCase());
+        if(artist === "") {
+            artist = artistReg;
+        }
+        var mmIdURL = 'https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/artist.search?q_artist=' + artist + '&format=json&page_size=1&apikey=b5e0240f05d26723cb7f94f92190760f';
+
+        $.ajax({
+            url: mmIdURL,
+            method: 'GET'
+        }).then(function(res2) {
+            var dater = (JSON.parse(res2));
+            console.log(dater);
+            console.log(dater.message.body.artist_list[0].artist.artist_name)
+
+            // Creating Link to Artist Twitter
+            if (dater.message.body.artist_list[0].artist.artist_twitter_url === '') {
+                console.log('No Twitter link Available');
+                return;
+            }
+            else {
+                var twitterURL = dater.message.body.artist_list[0].artist.artist_twitter_url;
+                console.log(twitterURL);
+                $('#twitter-logo').attr({
+                    src:'imgs/twitter-logo.png',
+                    width: 120,
+                    height: 120
+                });
+                $('#twitter-logo').wrap($('<a />').attr({href:twitterURL, target:'_blank'})).parent();
+            }
+
+        })
     }
 });
 // ----------------------------------------------------------------------------------------------

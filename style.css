@@ -88,4 +88,8 @@
 
 .albums {
     visibility: hidden;
+} 
+
+.jumbotron-image {
+    background-position: left center;
 }
