@@ -155,6 +155,7 @@ $(document).on('keypress',function(e) {
             // Creating Link to Artist Twitter
             if (dater.message.body.artist_list[0].artist.artist_twitter_url === '') {
                 console.log('No Twitter link Available');
+                $('#twitter-logo').empty();
                 return;
             }
             else {
@@ -172,6 +173,7 @@ $(document).on('keypress',function(e) {
             var aliasArray = dater.message.body.artist_list[0].artist.artist_alias_list;
             if (aliasArray === []) {
                 console.log('Artist has no known alias');
+                $('#alias-list').empty();
                 return;
             }
             else {
