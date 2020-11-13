@@ -33,14 +33,13 @@
     font-size: 15pt;
 }
 
-
 .similar-bottom-responsive {
     margin-top: 3rem;
 }
 
 .sac-bottom {
-    margin-top: 1rem;
-    width: 9rem;
+    float: left;
+    width: 10rem;
 }
 
 @media (max-width: 1200px) {
@@ -50,11 +49,20 @@
 
 @media (max-width: 991px) {
     .similar-responsive {display: none;}
-    /* .top-left {display: none;} */
+    .top-left {display: none;}
     .search-align {position: absolute;}
     .search-align {right: -35px;}
 }
 
+@media (max-width: 575px) {
+    .search-align {width:50%;}
+    .navbar-logo {width:50%;}
+    .artist-name {font-size: 3rem;}
+}
+
+@media (max-width: 575px) {
+    .artist-name {font-size: 2rem;}
+}
 
 @media (min-width: 992px) {
     .similar-bottom-responsive {display: none;}
@@ -67,3 +75,4 @@
 
 .albums {
     visibility: hidden;
+}

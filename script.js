@@ -23,7 +23,12 @@ $(document).on('keypress',function(e) {
 
     if(e.which == 13) {
         
-        var artist = encodeURIComponent($('.search').val().toLowerCase());
+        var artist = encodeURIComponent($('#search-nav').val().toLowerCase());
+        var artistReg = encodeURIComponent($('#search-reg').val().toLowerCase());
+        if(artist === "") {
+            artist = artistReg;
+        }
+        
         var tasteDive = 'https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?q=' + artist + '&type=music&k=391053-Musicolo-DLE4BMNM';
         
         var urlArray = [];
