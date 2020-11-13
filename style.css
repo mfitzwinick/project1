@@ -42,7 +42,15 @@
     width: 10rem;
 }
 
-@media (max-width: 1200px) {
+.albums-row {
+    margin-top: 1rem;
+}
+
+.popular-row {
+    margin-top: .5rem;
+}
+
+@media (max-width: 1199px) {
     .tabs-responsive {padding-left: 3rem;}
     .jumbo-responsive {padding-left: 3rem;}
 }
@@ -52,6 +60,11 @@
     .top-left {display: none;}
     .search-align {position: absolute;}
     .search-align {right: -35px;}
+}
+
+@media (max-width: 767px) {
+    /* .album-cover-mobile {width: 5rem; height: 5rem;} */
+    .album-titles {font-size: 2rem;}
 }
 
 @media (max-width: 575px) {
