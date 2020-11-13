@@ -32,3 +32,11 @@
     margin-left: 1rem;
     font-size: 15pt;
 }
+
+.popular {
+    visibility: hidden;
+}
+
+.albums {
+    visibility: hidden;
+}

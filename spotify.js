@@ -25,7 +25,7 @@ var lastTokenTime = localStorage.getItem("token-time")
 var timeDiff = parseInt(nowTime) - parseInt(lastTokenTime);
 
 //compare nowTime to last
-if(timeDiff >= 1 || timeDiff <= 0 || lastTokenTime === null) {
+if(timeDiff >= 1 || timeDiff < 0 || lastTokenTime === null) {
     getToken();
 }
 
@@ -54,16 +54,16 @@ $(document).on('keypress',function(e) {
                 };
             };
 
-            //ajax call to get artist data
-            var queryURL11 = "https://api.spotify.com/v1/artists/" + correctResultID;
-            $.ajax({
-                crossDomain: true,
-                headers:{"Content-Type": "application/json", "Authorization":"Bearer " + token},
-                url: queryURL11,
-                method: "GET"
-            }) .then(function(response) {
-                console.log(response)
-            });
+            // //ajax call to get artist data
+            // var queryURL11 = "https://api.spotify.com/v1/artists/" + correctResultID;
+            // $.ajax({
+            //     crossDomain: true,
+            //     headers:{"Content-Type": "application/json", "Authorization":"Bearer " + token},
+            //     url: queryURL11,
+            //     method: "GET"
+            // }) .then(function(response) {
+            //     //console.log(response)
+            // });
 
             //ajax call to get artist's albums
             var queryURL12 = "https://api.spotify.com/v1/artists/" + correctResultID + "/albums";
@@ -73,23 +73,24 @@ $(document).on('keypress',function(e) {
                 url: queryURL12,
                 method: "GET"
             }) .then(function(response) {
-                console.log(response)
+                // console.log(response)
+                $(".albums").css("visibility", "visible");
+                for(var i = 0; i < 3; i++) {
+                    $(".albumCover" + i).attr("src", response.items[i].images[i].url)
+                    $(".albumYear" + i).html(response.items[i].release_date)
+                    $(".albumTitle" + i).html(response.items[i].name)
+                };
 
-                //gets most recent 10 album IDs
+
+                //gets most recent 3 album IDs
                 var albumID = []
-                //@team not sure if we wanted recent 10 or all albums so included both code here
-                //gets all albums minus album_group: "appears_on"
-                // for(i of response.items){
-                //     if(i.album_group === "single")
-                //     albumID.push(i.id)
-                // };
-                for (var i = 0; i < 10; i++) {
+                for (var i = 0; i < 3; i++) {
                     albumID.push(response.items[i].id)
-                }
+                };
 
-                //loop to ajax call track information for each albumID
-                for(i of albumID) {
-                    var queryURL121 = "https://api.spotify.com/v1/albums/" + i + "/tracks";
+                //ajax call track information for most recent 3 albumID
+                for(var i = 0; i < albumID.length; i++) {
+                    var queryURL121 = "https://api.spotify.com/v1/albums/" + albumID[i] + "/tracks";
                     $.ajax({
                         crossDomain: true,
                         headers:{"Content-Type": "application/json", "Authorization":"Bearer " + token},
@@ -97,8 +98,13 @@ $(document).on('keypress',function(e) {
                         method: "GET"
                     }) .then(function(response) {
                         console.log(response)
+                        console.log(i)
+                        for (var j = 0; j < response.items.length; j++) {
+                            $(".albumSongs" + i).append("<h6 class='m-0 p-2'>" + (j + 1) + "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" + response.items[j].name + "</h6>")
+                            console.log(j)
+                        };
                     });
-                }
+                };
             });
 
             //ajax call to get artist's top 10 tracks
@@ -109,38 +115,42 @@ $(document).on('keypress',function(e) {
                 url: queryURL13,
                 method: "GET"
             }) .then(function(response) {
-                console.log(response)
-            });
-
-            //ajax call to get artist's top 3 most popular related artists
-            var queryURL14 = "https://api.spotify.com/v1/artists/" + correctResultID + "/related-artists";
-            $.ajax({
-                crossDomain: true,
-                headers:{"Content-Type": "application/json", "Authorization":"Bearer " + token},
-                url: queryURL14,
-                method: "GET"
-            }) .then(function(response) {
-                console.log(response)
-                for(var i = 0; i < 3; i++) {
-                    //uncompleted code to sort related artist list by popularity
-                    // var relArtists = [response.artists[i]]
-                    // console.log(relArtists)
-                    // console.log(responseArtistsI.sort(function(a,b) {
-                    //     return a.popularity - b.popularity
-                    // }));
-
-                    //changes domElem text to name of related artist
-                    var simArtistName = response.artists[i].name;
-                    var domElem = $('.card-title-'+ i);
-                    domElem.text(simArtistName);
-
-                    //changes imgAttr to src of related artist
-                    var simArtistImg = response.artists[i].images[0].url
-                    console.log(simArtistImg)
-                    $(".img" + i).attr("src", simArtistImg)
-
+                // console.log(response)
+                $(".popular").css("visibility", "visible");
+                $(".popularSongs").html("");
+                for(var i = 0; i < response.tracks.length; i++) {
+                    $(".popularSongs").append("<h6 class='m-0 p-2'>" + (i + 1) + "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" + response.tracks[i].name + "</h6>");
                 };
             });
+
+            // //ajax call to get artist's top 3 most popular related artists
+            // var queryURL14 = "https://api.spotify.com/v1/artists/" + correctResultID + "/related-artists";
+            // $.ajax({
+            //     crossDomain: true,
+            //     headers:{"Content-Type": "application/json", "Authorization":"Bearer " + token},
+            //     url: queryURL14,
+            //     method: "GET"
+            // }) .then(function(response) {
+            //     console.log(response)
+            //     for(var i = 0; i < 3; i++) {
+            //         //uncompleted code to sort related artist list by popularity
+            //         // var relArtists = [response.artists[i]]
+            //         // console.log(relArtists)
+            //         // console.log(responseArtistsI.sort(function(a,b) {
+            //         //     return a.popularity - b.popularity
+            //         // }));
+
+            //         //changes domElem text to name of related artist
+            //         var simArtistName = response.artists[i].name;
+            //         var domElem = $('.card-title-'+ i);
+            //         domElem.text(simArtistName);
+
+            //         //changes imgAttr to src of related artist
+            //         var simArtistImg = response.artists[i].images[0].url
+            //         console.log(simArtistImg)
+            //         $(".img" + i).attr("src", simArtistImg)
+            //     };
+            // });
         }); 
     };
 });

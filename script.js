@@ -86,8 +86,6 @@ $(document).on('keypress',function(e) {
                     height: 120
                 });
                 $('#fb-logo').wrap($('<a />').attr({href:fbURL, target:'_blank'})).parent();
-                console.log(fbLogo)
-                $('#social').append(fbLogo);
             }
         });
     }
