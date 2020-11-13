@@ -1,5 +1,5 @@
 // MORGAN'S CODE, PLS DONT TOUCH
-// var apiKey = 391053-Musicolo-DLE4BMNM
+// taste-dive apiKey = 391053-Musicolo-DLE4BMNM
 
 // var similarArray = [0, 1, 2];
 
@@ -8,6 +8,10 @@
 //     if(e.which == 13) {
         
 //         var artist = encodeURIComponent($('.search').val().toLowerCase());
+//         var artistReg = encodeURIComponent($('#search-reg').val().toLowerCase());
+//         if(artist === "") {
+//             artist = artistReg;
+//         }
 //         var tasteDive = 'https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?q=' + artist + '&type=music&k=391053-Musicolo-DLE4BMNM';
         
 //         var urlArray = [];
@@ -26,7 +30,7 @@
 //                 var domElem = $('.card-title-'+ elem);
 //                 domElem.text(simArtist);
 
-//                 var simArtist = encodeURIComponent(simArtist);
+//                 var simArtist = encodeURIComponent(simArtist.toLowerCase());
 //                 var simImgURL = "https://rest.bandsintown.com/artists/" + simArtist + "?app_id=codingbootcamp";
 
 //                 urlArray.push(simImgURL);
@@ -115,18 +119,28 @@
 $(document).on('keypress',function(e) {
     if(e.which == 13) {
         var artist = encodeURIComponent($('.search').val().toLowerCase());
-        var queryURL = "https://rest.bandsintown.com/artists/" + artist + "?app_id=codingbootcamp";
+        var artistReg = encodeURIComponent($('#search-reg').val().toLowerCase());
+        if(artist === "") {
+            artist = artistReg;
+        }
+        var bandsInTown = "https://rest.bandsintown.com/artists/" + artist + "?app_id=codingbootcamp";
+        $('#artist-name').addClass('animate__animated animate__fadeInRight');
         $.ajax({
-            url: queryURL,
+            url: bandsInTown,
             method: "GET"
         }).then(function(response) {
             console.log(response);
+
             // Getting and pasting artist name into Jumbotron
             $("#artist-name").text(response.name);
             
+            var jumboImg = response.image_url;
+            console.log(jumboImg);
+            $('.jumbotron-image').attr('style', 'background-image:' + "url(" + jumboImg + ")");
+
              // if artist has a fb page, a clickable fb icon will appear in the social tab and redirects you in a new tab
             if (response.facebook_page_url === '') {
-                console.log('no fb link');
+                console.log('No Facebook link available');
                 return;
             }
             else {
@@ -138,21 +152,64 @@ $(document).on('keypress',function(e) {
                     height: 120
                 });
                 $('#fb-logo').wrap($('<a />').attr({href:fbURL, target:'_blank'})).parent();
-                console.log(fbLogo)
-                $('#social').append(fbLogo);
             }
         });
     }
 });
 
+// $('#artist-name').removeClass('animate__animated animate__fadeInRight');
 
 
-            // var artistURL = $("<a>").attr("href", response.url).append(artistName);
-            // var artistImage = $("<img>").attr("src", response.thumb_url);
-            // var trackerCount = $("<h2>").text(response.tracker_count + " fans tracking this artist");
-            // var upcomingEvents = $("<h2>").text(response.upcoming_event_count + " upcoming events");
-            // var goToArtist = $("<a>").attr("href", response.url).text("See Tour Dates");
 
-            // // Empty the contents of the artist-div, append the new artist content
-            // $("#artist-div").empty();
-            // $("#artist-div").append(artistURL, artistImage, trackerCount, upcomingEvents, goToArtist);
+        // var artistURL = $("<a>").attr("href", response.url).append(artistName);
+        // var artistImage = $("<img>").attr("src", response.thumb_url);
+        // var trackerCount = $("<h2>").text(response.tracker_count + " fans tracking this artist");
+        // var upcomingEvents = $("<h2>").text(response.upcoming_event_count + " upcoming events");
+        // var goToArtist = $("<a>").attr("href", response.url).text("See Tour Dates");
+
+        // // Empty the contents of the artist-div, append the new artist content
+        // $("#artist-div").empty();
+        // $("#artist-div").append(artistURL, artistImage, trackerCount, upcomingEvents, goToArtist);
+
+// Testing MusixMatch API
+// musixmatch apiKey = b5e0240f05d26723cb7f94f92190760f
+
+
+// Getting artist ID from name
+
+$(document).on('keypress',function(e) {
+    if(e.which == 13) {
+        var artist = encodeURIComponent($('.search').val().toLowerCase());
+        var artistReg = encodeURIComponent($('#search-reg').val().toLowerCase());
+        if(artist === "") {
+            artist = artistReg;
+        }
+        var mmIdURL = 'https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/artist.search?q_artist=' + artist + '&format=json&page_size=1&apikey=b5e0240f05d26723cb7f94f92190760f';
+
+        $.ajax({
+            url: mmIdURL,
+            method: 'GET'
+        }).then(function(res2) {
+            var dater = (JSON.parse(res2));
+            console.log(dater);
+            console.log(dater.message.body.artist_list[0].artist.artist_name)
+
+            // Creating Link to Artist Twitter
+            if (dater.message.body.artist_list[0].artist.artist_twitter_url === '') {
+                console.log('No Twitter link Available');
+                return;
+            }
+            else {
+                var twitterURL = dater.message.body.artist_list[0].artist.artist_twitter_url;
+                console.log(twitterURL);
+                $('#twitter-logo').attr({
+                    src:'imgs/twitter-logo.png',
+                    width: 120,
+                    height: 120
+                });
+                $('#twitter-logo').wrap($('<a />').attr({href:twitterURL, target:'_blank'})).parent();
+            }
+
+        })
+    }
+});
