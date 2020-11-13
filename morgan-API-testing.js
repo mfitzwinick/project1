@@ -8,6 +8,10 @@
 //     if(e.which == 13) {
         
 //         var artist = encodeURIComponent($('.search').val().toLowerCase());
+//         var artistReg = encodeURIComponent($('#search-reg').val().toLowerCase());
+//         if(artist === "") {
+//             artist = artistReg;
+//         }
 //         var tasteDive = 'https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?q=' + artist + '&type=music&k=391053-Musicolo-DLE4BMNM';
         
 //         var urlArray = [];
@@ -115,6 +119,10 @@
 $(document).on('keypress',function(e) {
     if(e.which == 13) {
         var artist = encodeURIComponent($('.search').val().toLowerCase());
+        var artistReg = encodeURIComponent($('#search-reg').val().toLowerCase());
+        if(artist === "") {
+            artist = artistReg;
+        }
         var bandsInTown = "https://rest.bandsintown.com/artists/" + artist + "?app_id=codingbootcamp";
         $('#artist-name').addClass('animate__animated animate__fadeInRight');
         $.ajax({
@@ -172,6 +180,10 @@ $(document).on('keypress',function(e) {
 $(document).on('keypress',function(e) {
     if(e.which == 13) {
         var artist = encodeURIComponent($('.search').val().toLowerCase());
+        var artistReg = encodeURIComponent($('#search-reg').val().toLowerCase());
+        if(artist === "") {
+            artist = artistReg;
+        }
         var mmIdURL = 'https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/artist.search?q_artist=' + artist + '&format=json&page_size=1&apikey=b5e0240f05d26723cb7f94f92190760f';
 
         $.ajax({
