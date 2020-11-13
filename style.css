@@ -33,6 +33,7 @@
     font-size: 15pt;
 }
 
+
 .similar-bottom-responsive {
     margin-top: 3rem;
 }
@@ -59,3 +60,10 @@
     .similar-bottom-responsive {display: none;}
     .navbar {display:none;}
 }
+
+ .popular {
+    visibility: hidden;
+}
+
+.albums {
+    visibility: hidden;
