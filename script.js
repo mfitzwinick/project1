@@ -1,3 +1,4 @@
+// Shanni's MediaQuery 
 // var screenHeight = window.screen.height
 // var screenWidth = window.screen.width
 // var bigSide = $(".big-side")
