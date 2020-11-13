@@ -1,4 +1,16 @@
-
+// var screenHeight = window.screen.height
+// var screenWidth = window.screen.width
+// var bigSide = $(".big-side")
+// var smallSide = $(".small-side");
+// $(window).resize(function(e) {
+//     if(e.target.innerWidth < 1200) {
+//         bigSide.addClass("none");
+//         smallSide.removeClass("none");
+//     } else {
+//         bigSide.removeClass("none");
+//         smallSide.addClass("none");
+//     }
+// })
 
 // MORGAN'S CODE, PLS DONT TOUCH -----------------------------------------------------------
 // var apiKey = 391053-Musicolo-DLE4BMNM
@@ -7,6 +19,7 @@ var similarArray = [0, 1, 2];
 
 // Key down event for 'return' key
 $(document).on('keypress',function(e) {
+
     if(e.which == 13) {
         
         var artist = encodeURIComponent($('.search').val().toLowerCase());
