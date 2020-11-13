@@ -26,7 +26,7 @@
 //                 var domElem = $('.card-title-'+ elem);
 //                 domElem.text(simArtist);
 
-//                 var simArtist = encodeURIComponent(simArtist);
+//                 var simArtist = encodeURIComponent(simArtist.toLowerCase());
 //                 var simImgURL = "https://rest.bandsintown.com/artists/" + simArtist + "?app_id=codingbootcamp";
 
 //                 urlArray.push(simImgURL);
@@ -115,18 +115,21 @@
 $(document).on('keypress',function(e) {
     if(e.which == 13) {
         var artist = encodeURIComponent($('.search').val().toLowerCase());
-        var queryURL = "https://rest.bandsintown.com/artists/" + artist + "?app_id=codingbootcamp";
+        var bandsInTown = "https://rest.bandsintown.com/artists/" + artist + "?app_id=codingbootcamp";
         $.ajax({
-            url: queryURL,
+            url: bandsInTown,
             method: "GET"
         }).then(function(response) {
             console.log(response);
+
             // Getting and pasting artist name into Jumbotron
             $("#artist-name").text(response.name);
             
+            // $('.jumbotron-fluid').attr('background-image', url(response.image_url));
+
              // if artist has a fb page, a clickable fb icon will appear in the social tab and redirects you in a new tab
             if (response.facebook_page_url === '') {
-                console.log('no fb link');
+                console.log('No Facebook link available');
                 return;
             }
             else {
@@ -138,8 +141,6 @@ $(document).on('keypress',function(e) {
                     height: 120
                 });
                 $('#fb-logo').wrap($('<a />').attr({href:fbURL, target:'_blank'})).parent();
-                console.log(fbLogo)
-                $('#social').append(fbLogo);
             }
         });
     }
