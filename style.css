@@ -49,7 +49,7 @@
 
 @media (max-width: 991px) {
     .similar-responsive {display: none;}
-    .top-left {display: none;}
+    /* .top-left {display: none;} */
     .search-align {position: absolute;}
     .search-align {right: -35px;}
 }
