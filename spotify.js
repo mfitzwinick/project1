@@ -33,7 +33,11 @@ if(timeDiff >= 1 || timeDiff < 0 || lastTokenTime === null) {
 $(document).on('keypress',function(e) {
     let code = e.keyCode || e.which;
     if(code == 13) {
-        var artistSearch = $('.search').val().toLowerCase().trim();
+        var artistSearch = encodeURIComponent($('#search-nav').val().toLowerCase());
+        var artistReg = encodeURIComponent($('#search-reg').val().toLowerCase());
+        if(artistSearch === "") {
+            artistSearch = artistReg;
+        }
         var queryURL1 = "https://api.spotify.com/v1/search?q=" + artistSearch + "&type=artist";
         //ajax call for searched artist Spotify ID 
         $.ajax({
