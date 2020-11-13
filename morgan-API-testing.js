@@ -112,42 +112,42 @@
 
 
 // Ajax call to Bandsintown
-// $(document).on('keypress',function(e) {
-//     if(e.which == 13) {
-//         var artist = encodeURIComponent($('.search').val().toLowerCase());
-//         var bandsInTown = "https://rest.bandsintown.com/artists/" + artist + "?app_id=codingbootcamp";
-//         $('#artist-name').addClass('animate__animated animate__fadeInRight');
-//         $.ajax({
-//             url: bandsInTown,
-//             method: "GET"
-//         }).then(function(response) {
-//             console.log(response);
+$(document).on('keypress',function(e) {
+    if(e.which == 13) {
+        var artist = encodeURIComponent($('.search').val().toLowerCase());
+        var bandsInTown = "https://rest.bandsintown.com/artists/" + artist + "?app_id=codingbootcamp";
+        $('#artist-name').addClass('animate__animated animate__fadeInRight');
+        $.ajax({
+            url: bandsInTown,
+            method: "GET"
+        }).then(function(response) {
+            console.log(response);
 
-//             // Getting and pasting artist name into Jumbotron
-//             $("#artist-name").text(response.name);
+            // Getting and pasting artist name into Jumbotron
+            $("#artist-name").text(response.name);
             
-//             var jumboImg = response.image_url;
-//             console.log(jumboImg);
-//             $('.jumbotron-image').attr('style', 'background-image:' + "url(" + jumboImg + ")");
+            var jumboImg = response.image_url;
+            console.log(jumboImg);
+            $('.jumbotron-image').attr('style', 'background-image:' + "url(" + jumboImg + ")");
 
-//              // if artist has a fb page, a clickable fb icon will appear in the social tab and redirects you in a new tab
-//             if (response.facebook_page_url === '') {
-//                 console.log('No Facebook link available');
-//                 return;
-//             }
-//             else {
-//                 var fbURL = response.facebook_page_url;
-//                 console.log(fbURL);
-//                 $('#fb-logo').attr({
-//                     src:'imgs/fb-logo.jpg',
-//                     width: 120,
-//                     height: 120
-//                 });
-//                 $('#fb-logo').wrap($('<a />').attr({href:fbURL, target:'_blank'})).parent();
-//             }
-//         });
-//     }
-// });
+             // if artist has a fb page, a clickable fb icon will appear in the social tab and redirects you in a new tab
+            if (response.facebook_page_url === '') {
+                console.log('No Facebook link available');
+                return;
+            }
+            else {
+                var fbURL = response.facebook_page_url;
+                console.log(fbURL);
+                $('#fb-logo').attr({
+                    src:'imgs/fb-logo.jpg',
+                    width: 120,
+                    height: 120
+                });
+                $('#fb-logo').wrap($('<a />').attr({href:fbURL, target:'_blank'})).parent();
+            }
+        });
+    }
+});
 
 // $('#artist-name').removeClass('animate__animated animate__fadeInRight');
 
@@ -183,8 +183,21 @@ $(document).on('keypress',function(e) {
             console.log(dater.message.body.artist_list[0].artist.artist_name)
 
             // Creating Link to Artist Twitter
-            var twitterURL = dater.message.artist_list[0].artist.artist_twitter_url;
-            
+            if (dater.message.body.artist_list[0].artist.artist_twitter_url === '') {
+                console.log('No Twitter link Available');
+                return;
+            }
+            else {
+                var twitterURL = dater.message.body.artist_list[0].artist.artist_twitter_url;
+                console.log(twitterURL);
+                $('#twitter-logo').attr({
+                    src:'imgs/twitter-logo.png',
+                    width: 120,
+                    height: 120
+                });
+                $('#twitter-logo').wrap($('<a />').attr({href:twitterURL, target:'_blank'})).parent();
+            }
+
         })
     }
 });
