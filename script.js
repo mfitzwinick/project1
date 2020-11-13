@@ -178,9 +178,11 @@ $(document).on('keypress',function(e) {
             }
             else {
                 $('#alias-list').text('This artist may also go by: ');
+                $('#alias-list').attr('style', 'margin-bottom:8px');
                 for (elem of aliasArray) {
                     var aliasName = $('<p>').text('- ' + elem.artist_alias);
-                    aliasName.attr('style', 'font-size:1rem')
+                    aliasName.attr('style', 'font-size:1rem'),
+                    aliasName.attr('style', 'padding:8px'),
                     $('#alias-list').append(aliasName);
                 }
             }
