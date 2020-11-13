@@ -1,65 +1,65 @@
 // MORGAN'S CODE, PLS DONT TOUCH
 // taste-dive apiKey = 391053-Musicolo-DLE4BMNM
 
-// var similarArray = [0, 1, 2];
+var similarArray = [0, 1, 2];
 
-// // Key down event for 'return' key
-// $(document).on('keypress',function(e) {
-//     if(e.which == 13) {
+// Key down event for 'return' key
+$(document).on('keypress',function(e) {
+    if(e.which == 13) {
         
-//         var artist = encodeURIComponent($('.search').val().toLowerCase());
-//         var artistReg = encodeURIComponent($('#search-reg').val().toLowerCase());
-//         if(artist === "") {
-//             artist = artistReg;
-//         }
-//         var tasteDive = 'https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?q=' + artist + '&type=music&k=391053-Musicolo-DLE4BMNM';
+        var artist = encodeURIComponent($('.search').val().toLowerCase());
+        var artistReg = encodeURIComponent($('#search-reg').val().toLowerCase());
+        if(artist === "") {
+            artist = artistReg;
+        }
+        var tasteDive = 'https://cors-anywhere.herokuapp.com/https://tastedive.com/api/similar?q=' + artist + '&type=music&k=391053-Musicolo-DLE4BMNM';
         
-//         var urlArray = [];
-//         // var imgArray = [];
+        var urlArray = [];
+        // var imgArray = [];
 
 
-//         // Ajax call to 'taste-dive' API to get names of similar artists
-//         $.ajax({
-//             url: tasteDive,
-//             method: 'GET'
-//         }).then(function(response) {
-//             console.log(response);
-//             // Pasting the similar artists name to each dom element
-//             for (elem of similarArray) {
-//                 var simArtist = response.Similar.Results[elem].Name;
-//                 var domElem = $('.card-title-'+ elem);
-//                 domElem.text(simArtist);
+        // Ajax call to 'taste-dive' API to get names of similar artists
+        $.ajax({
+            url: tasteDive,
+            method: 'GET'
+        }).then(function(response) {
+            console.log(response);
+            // Pasting the similar artists name to each dom element
+            for (elem of similarArray) {
+                var simArtist = response.Similar.Results[elem].Name;
+                var domElem = $('.card-title-'+ elem);
+                domElem.text(simArtist);
 
-//                 var simArtist = encodeURIComponent(simArtist.toLowerCase());
-//                 var simImgURL = "https://rest.bandsintown.com/artists/" + simArtist + "?app_id=codingbootcamp";
+                var simArtist = encodeURIComponent(simArtist.toLowerCase());
+                var simImgURL = "https://rest.bandsintown.com/artists/" + simArtist + "?app_id=codingbootcamp";
 
-//                 urlArray.push(simImgURL);
-//             }
-//             //  Ajax call to 'Bandsintown' API for the photos of similar artists 
-//             $.ajax({
-//                 url: urlArray[0],
-//                 method: "GET",
-//             }).then(function(res) {
-//                 $('#sim-artist-img-0').attr('src', res.image_url);
-//             });
+                urlArray.push(simImgURL);
+            }
+            //  Ajax call to 'Bandsintown' API for the photos of similar artists 
+            $.ajax({
+                url: urlArray[0],
+                method: "GET",
+            }).then(function(res) {
+                $('#sim-artist-img-0').attr('src', res.image_url);
+            });
 
-//             $.ajax({
-//                 url: urlArray[1],
-//                 method: "GET",
-//             }).then(function(res) {
-//                 $('#sim-artist-img-1').attr('src', res.image_url);
-//             });
+            $.ajax({
+                url: urlArray[1],
+                method: "GET",
+            }).then(function(res) {
+                $('#sim-artist-img-1').attr('src', res.image_url);
+            });
 
-//             $.ajax({
-//                 url: urlArray[2],
-//                 method: "GET",
-//             }).then(function(res) {
-//                 $('#sim-artist-img-2').attr('src', res.image_url);
-//             });
+            $.ajax({
+                url: urlArray[2],
+                method: "GET",
+            }).then(function(res) {
+                $('#sim-artist-img-2').attr('src', res.image_url);
+            });
             
-//         });
-//     }
-// });
+        });
+    }
+});
 
 
             // ------------- CODE THAT WE TRIED ----------------
@@ -128,23 +128,33 @@ $(document).on('keypress',function(e) {
         $.ajax({
             url: bandsInTown,
             method: "GET"
-        }).then(function(response) {
-            console.log(response);
+        }).then(function(res1) {
+            console.log(res1);
 
             // Getting and pasting artist name into Jumbotron
-            $("#artist-name").text(response.name);
+            $("#artist-name").text(res1.name);
             
-            var jumboImg = response.image_url;
+            
+            // Upcoming events Count
+            var upcomingEventCount = res1.upcoming_event_count;
+            if (upcomingEventCount === 0) {
+                $('#event-count').text('Sorry, this artist has no upcoming events');
+            }
+            else {
+                $('#event-count').text('Number of Upcoming Events: ' + upcomingEventCount);
+            }
+            
+            var jumboImg = res1.image_url;
             console.log(jumboImg);
             $('.jumbotron-image').attr('style', 'background-image:' + "url(" + jumboImg + ")");
 
              // if artist has a fb page, a clickable fb icon will appear in the social tab and redirects you in a new tab
-            if (response.facebook_page_url === '') {
+            if (res1.facebook_page_url === '') {
                 console.log('No Facebook link available');
                 return;
             }
             else {
-                var fbURL = response.facebook_page_url;
+                var fbURL = res1.facebook_page_url;
                 console.log(fbURL);
                 $('#fb-logo').attr({
                     src:'imgs/fb-logo.jpg',
@@ -161,22 +171,12 @@ $(document).on('keypress',function(e) {
 
 
 
-        // var artistURL = $("<a>").attr("href", response.url).append(artistName);
-        // var artistImage = $("<img>").attr("src", response.thumb_url);
-        // var trackerCount = $("<h2>").text(response.tracker_count + " fans tracking this artist");
-        // var upcomingEvents = $("<h2>").text(response.upcoming_event_count + " upcoming events");
-        // var goToArtist = $("<a>").attr("href", response.url).text("See Tour Dates");
 
-        // // Empty the contents of the artist-div, append the new artist content
-        // $("#artist-div").empty();
-        // $("#artist-div").append(artistURL, artistImage, trackerCount, upcomingEvents, goToArtist);
 
-// Testing MusixMatch API
+// Testing MusixMatch API -----------------------------------------------------
 // musixmatch apiKey = b5e0240f05d26723cb7f94f92190760f
 
-
-// Getting artist ID from name
-
+// Connecting artist twitter to social tab
 $(document).on('keypress',function(e) {
     if(e.which == 13) {
         var artist = encodeURIComponent($('.search').val().toLowerCase());
@@ -208,6 +208,21 @@ $(document).on('keypress',function(e) {
                     height: 120
                 });
                 $('#twitter-logo').wrap($('<a />').attr({href:twitterURL, target:'_blank'})).parent();
+            }
+
+            // Artist Alias
+            var aliasArray = dater.message.body.artist_list[0].artist.artist_alias_list;
+            if (aliasArray === []) {
+                console.log('Artist has no known alias');
+                return;
+            }
+            else {
+                $('#alias-list').text('This artist may also go by: ');
+                for (elem of aliasArray) {
+                    var aliasName = $('<p>').text('- ' + elem.artist_alias);
+                    aliasName.attr('style', 'font-size:1rem')
+                    $('#alias-list').append(aliasName);
+                }
             }
 
         })
