@@ -19,6 +19,10 @@
 // MORGAN'S CODE, PLS DONT TOUCH -----------------------------------------------------------
 // var apiKey = 391053-Musicolo-DLE4BMNM
 
+// function clearInput() {
+//     $('#search-nav').val('');
+// }
+
 var similarArray = [0, 1, 2];
 
 // Key down event for 'return' key
@@ -98,8 +102,9 @@ $(document).on('keypress',function(e) {
         }).then(function(res1) {
             console.log(res1);
 
+            var artist = res1.name;
             // Getting and pasting artist name into Jumbotron
-            $("#artist-name").text(res1.name);
+            $("#artist-name").text(artist);
             
             
             // Upcoming events Count
@@ -119,8 +124,7 @@ $(document).on('keypress',function(e) {
             // console.log(jumboImg);
             $('.jumbotron-image').attr('style', 'background-image:' + "url(" + jumboImg + ")");
 
-             // if artist has a fb page, a clickable fb icon will appear in the social tab and redirects you in a new tab
-            var artist = res1.name;
+            // if artist has a fb page, a clickable fb icon will appear in the social tab and redirects you in a new tab
             if (res1.facebook_page_url === '') {
                 console.log('No Facebook link available');
                 $('#fb-logo').removeAttr('src width height');
@@ -156,17 +160,14 @@ $(document).on('keypress',function(e) {
         }).then(function(res2) {
             var dater = (JSON.parse(res2));
             console.log(dater);
-            var artist = dater.message.body.artist_list[0].artist.artist_name;
             
             // Creating Link to Artist Twitter
             if (dater.message.body.artist_list[0].artist.artist_twitter_url === '') {
                 console.log('No Twitter link Available');
                 $('#twitter-logo').removeAttr('src width height');
-                ('#artist-follow').empty();
             }
             else {
-                // var socialLinks = 'Follow ' + artist + ' on social media:';
-                $('#follow-artist').html('Follow ' + artist + ' on social media:');
+                // $('#follow-artist').html('Follow ' + artist + ' on social media:');
                 var twitterURL = dater.message.body.artist_list[0].artist.artist_twitter_url;
                 console.log(twitterURL);
                 $('#twitter-logo').attr({
@@ -189,7 +190,9 @@ $(document).on('keypress',function(e) {
                 $('.alias').empty();
             }
             else {
-                $('#alias-list').text('This artist may also go by: ');
+                $('.alias').empty();
+                var artist = dater.message.body.artist_list[0].artist.artist_name;
+                $('#alias-list').text(artist + ' may also go by: ');
                 for (elem of aliasArray) {
                     var aliasName = $('<li>').text(elem.artist_alias);
                     aliasName.css('style', 'font-size:1rem');
