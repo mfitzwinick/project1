@@ -46,7 +46,6 @@ $(document).on('keypress',function(e) {
             // Pasting the similar artists name to each dom element
             $(".card-border").css("visibility", "visible");
             for (elem of similarArray) {
-                console.log(response.Similar.Results[elem]?.Name)
                 var simArtist = response.Similar.Results[elem].Name;
                 var domElem = $('.card-title-'+ elem);
                 domElem.text(simArtist);
@@ -106,22 +105,28 @@ $(document).on('keypress',function(e) {
             // Upcoming events Count
             var upcomingEventCount = res1.upcoming_event_count;
             if (upcomingEventCount === 0) {
-                $('#event-count').text('Sorry, this artist has no upcoming events');
+                $('#event-count').text('Sorry, this artist currently has no upcoming events. Please check back later for the newest updates.');
+                $('#event-count').css({
+                    'text-align':'center',
+                    'margin-top':16
+                });
             }
             else {
                 $('#event-count').text('Number of Upcoming Events: ' + upcomingEventCount);
             }
             
             var jumboImg = res1.image_url;
-            console.log(jumboImg);
+            // console.log(jumboImg);
             $('.jumbotron-image').attr('style', 'background-image:' + "url(" + jumboImg + ")");
 
              // if artist has a fb page, a clickable fb icon will appear in the social tab and redirects you in a new tab
+            var artist = res1.name;
             if (res1.facebook_page_url === '') {
                 console.log('No Facebook link available');
-                return;
+                $('#fb-logo').removeAttr('src width height');
             }
             else {
+                $('#follow-artist').html('Follow ' + artist + ' on social media:');
                 var fbURL = res1.facebook_page_url;
                 console.log(fbURL);
                 $('#fb-logo').attr({
@@ -136,7 +141,6 @@ $(document).on('keypress',function(e) {
 });
 
 
-// Connecting artist twitter to social tab
 $(document).on('keypress',function(e) {
     if(e.which == 13) {
         var artist = encodeURIComponent($('.search').val().toLowerCase());
@@ -152,15 +156,17 @@ $(document).on('keypress',function(e) {
         }).then(function(res2) {
             var dater = (JSON.parse(res2));
             console.log(dater);
-            console.log(dater.message.body.artist_list[0].artist.artist_name)
-
+            var artist = dater.message.body.artist_list[0].artist.artist_name;
+            
             // Creating Link to Artist Twitter
             if (dater.message.body.artist_list[0].artist.artist_twitter_url === '') {
                 console.log('No Twitter link Available');
-                $('#twitter-logo').empty();
-                return;
+                $('#twitter-logo').removeAttr('src width height');
+                ('#artist-follow').empty();
             }
             else {
+                // var socialLinks = 'Follow ' + artist + ' on social media:';
+                $('#follow-artist').html('Follow ' + artist + ' on social media:');
                 var twitterURL = dater.message.body.artist_list[0].artist.artist_twitter_url;
                 console.log(twitterURL);
                 $('#twitter-logo').attr({
@@ -170,26 +176,29 @@ $(document).on('keypress',function(e) {
                 });
                 $('#twitter-logo').wrap($('<a />').attr({href:twitterURL, target:'_blank'})).parent();
             }
-
+            
             // Artist Alias
             var aliasArray = dater.message.body.artist_list[0].artist.artist_alias_list;
-            if (aliasArray === []) {
+            if (dater.message.body.artist_list.length === 0) {
+                $('#alias-list').empty();
+                $('.alias').empty();
+            }
+            if (aliasArray.length === 0) {
                 console.log('Artist has no known alias');
                 $('#alias-list').empty();
-                return;
+                $('.alias').empty();
             }
             else {
                 $('#alias-list').text('This artist may also go by: ');
-                $('#alias-list').attr('style', 'margin-bottom:8px');
                 for (elem of aliasArray) {
-                    var aliasName = $('<p>').text('- ' + elem.artist_alias);
-                    aliasName.attr('style', 'font-size:1rem'),
-                    aliasName.attr('style', 'padding:8px'),
-                    $('#alias-list').append(aliasName);
+                    var aliasName = $('<li>').text(elem.artist_alias);
+                    aliasName.css('style', 'font-size:1rem');
+                    aliasName.css({padding:8, margin:0});
+                    $('.alias').append(aliasName);
                 }
             }
 
-        })
+        });
     }
 });
 // ----------------------------------------------------------------------------------------------

@@ -24,6 +24,7 @@ $(document).on('keypress',function(e) {
             method: 'GET'
         }).then(function(response) {
             console.log(response);
+            $(".card-border").css("visibility", "visible");
             // Pasting the similar artists name to each dom element
             for (elem of similarArray) {
                 var simArtist = response.Similar.Results[elem].Name;
