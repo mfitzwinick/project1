@@ -13,8 +13,11 @@
 //     }
 // })
 
-
-
+// On page load run localStorage(artist)
+var artist = localStorage.getItem("lastSearch");
+getRelArtist(artist);
+getEvents(artist);
+getSocials(artist);
 
 // MORGAN'S CODE, PLS DONT TOUCH ----------------------- sorry I touched - nate
 // var apiKey = 391053-Musicolo-DLE4BMNM
@@ -81,6 +84,7 @@ $(document).on('keypress',function(e) {
         if(artist === "") {
             artist = artistReg;
         }
+        localStorage.setItem('lastSearch', artist);
         getRelArtist(artist);
     }
 });
@@ -89,6 +93,7 @@ $(document).on('keypress',function(e) {
 $(".relArtist").on("click", function(e) {
     e.preventDefault();
     var relArtistData = encodeURI($(this).text())
+    localStorage.setItem('lastSearch', relArtistData);
     getRelArtist(relArtistData)
     // console.log(relArtistData)
 });
@@ -119,8 +124,8 @@ function getEvents(artist) {
             }
             
             var jumboImg = res1.image_url;
-            //console.log(jumboImg);
-            $('.jumbotron-image').attr('style', 'background-image:' + "url(" + jumboImg + ")");
+            // console.log(jumboImg);
+            $('.jumbotron-image').attr('style', 'background: '+ "linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), " + "url(" + jumboImg + ")");
 
              // if artist has a fb page, a clickable fb icon will appear in the social tab and redirects you in a new tab
             if (res1.facebook_page_url === '') {
@@ -172,7 +177,7 @@ function getSocials(artist) {
         method: 'GET'
     }).then(function(res2) {
         var dater = (JSON.parse(res2));
-        console.log(dater);
+        // console.log(dater);
         // console.log(dater.message.body.artist_list[0].artist.artist_name)
 
         // Creating Link to Artist Twitter
@@ -227,7 +232,7 @@ $(document).on('keypress',function(e) {
     }
 });
 
-// Key press to get related artist socials
+// Click event to get related artist socials
 $(".relArtist").on("click", function(e) {
     e.preventDefault();
     var relArtistSocials = encodeURI($(this).text())
