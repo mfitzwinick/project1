@@ -99,8 +99,8 @@ function getArtistData(artistSearch) {
                         $(".albumSongs").html("");
                         // console.log(response)
                         for (var j = 0; j < response.items.length; j++) {
-                            console.log(response.items[j].name)
-                            console.log(i)
+                            // console.log(response.items[j].name)
+                            // console.log(i)
                             // $(".albumSongs" + i).append("<h6 class='m-0 p-2'>" + (j + 1) + "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" + response.items[j].name + "</h6>")
                             $(".albumSongs0").append("<h6 class='m-0 p-2'>" + (j + 1) + "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" + response.items[j].name + "</h6>")
                             $(".albumSongs1").append("<h6 class='m-0 p-2'>" + (j + 1) + "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" + response.items[j].name + "</h6>")
@@ -185,7 +185,8 @@ $(document).on('keypress',function(e) {
     };
 });
 
-$(".relArtist").on("click", function() {
+$(".relArtist").on("click", function(e) {
+    e.preventDefault();
     var relArtistSearch = encodeURI($(this).text())
     getArtistData(relArtistSearch)
     console.log(relArtistSearch)
