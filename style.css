@@ -127,3 +127,7 @@
 .jumbotron-image {
     background-position: left center;
 }
+
+.card-border {
+    visibility: hidden;
+}
