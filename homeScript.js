@@ -1,21 +1,19 @@
 
-
 $(document).on('keypress',function(e) {
     if(e.which == 13) {   
         var artist = encodeURIComponent($('.form-control').val().toLowerCase());
-    localStorage.setItem('userInput', artist)
-    if (artist!=="") {
-    window.location.href="./index.html"
-}
-
-}
-})
+        localStorage.setItem('lastSearch', artist);
+        if (artist!=="") {
+            window.location.href="index.html"
+        };
+    };   
+});
 
 
 $("#button-addon2").on("click", function() {
-   var artist = encodeURIComponent($('.form-control').val().toLowerCase());
-    localStorage.setItem('userInput', artist)
+    var artist = encodeURIComponent($('.form-control').val().toLowerCase());
+    localStorage.setItem('lastSsearch', artist)
     if (artist!=="") {
-        window.location.href="./index.html"
-    }
+        window.location.href="index.html"
+    };
 });
