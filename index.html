@@ -109,7 +109,7 @@
                                 <div class="row col-12 pl-0">
                                     <img class="col-3 albumCover0" src="">
                                     <div class="col-9 pl-0 albumHeadText">
-                                        <h7 class="albumYear0"></h7>
+                                        <h7 class="albumYear0 album-years"></h7>
                                         <h1 class="albumTitle0 album-titles"></h1>
                                     </div>
                                     <div class="col-12 mt-3 albumSongs0 albumSongs"></div>
@@ -117,7 +117,7 @@
                                 <div class="row col-12 pl-0">
                                     <img class="col-3 albumCover1" src="">
                                     <div class="col-9 pl-0 albumHeadText">
-                                        <h7 class="albumYear1"></h7>
+                                        <h7 class="albumYear1 album-years"></h7>
                                         <h1 class="albumTitle1 album-titles"></h1>
                                     </div>
                                     <div class="col-12 mt-3 albumSongs1 albumSongs"></div>
@@ -125,17 +125,21 @@
                                 <div class="row col-12 pl-0">
                                     <img class="col-3 albumCover2" src="">
                                     <div class="col-9 pl-0 albumHeadText">
-                                        <h7 class="albumYear2"></h7>
+                                        <h7 class="albumYear2 album-years"></h7>
                                         <h1 class="albumTitle2 album-titles"></h1>
                                     </div>
                                     <div class="col-12 mt-3 albumSongs2 albumSongs"></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="upcoming-events" role="tabpanel" aria-labelledby="upcoming-events-tab">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae dolorum, vero at dolore expedita veniam beatae id aut assumenda eaque modi perspiciatis, tempore magnam corrupti. Dolorum suscipit doloremque ut numquam! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis debitis porro sed animi dicta alias repellat aut quos facere quo eum voluptas odio, hic repudiandae, autem dolorum? Perferendis, commodi ad.</div>
+                        <div class="tab-pane fade" id="upcoming-events" role="tabpanel" aria-labelledby="upcoming-events-tab">
+                            <h3 id="event-count"></h3>
+                        </div>
                         <div class="tab-pane fade" id="social" role="tabpanel" aria-labelledby="social-tab">
                             <img id="fb-logo" src="" alt="">
                             <img id="twitter-logo" src="" alt="">
+                            <br>
+                            <h3 id="alias-list"></h3>
                         </div>
                       </div>
                 </div>
@@ -145,10 +149,10 @@
         </div>
         
             <!-- Similar Artists Cards - mobile -->
-            <div class="similar-bottom-responsive">
+            <div class="similar-bottom-responsive container">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h2 class="text-center">Check Out Similar Artists</h2>
+                        <h2 class="text-center similar-bottom-header">Check Out Similar Artists</h2>
                     </div>
                 </div>
                 <div class="row d-flex no-gutters justify-content-center">

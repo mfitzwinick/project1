@@ -91,27 +91,38 @@ $(document).on('keypress',function(e) {
         if(artist === "") {
             artist = artistReg;
         }
-        var queryURL = "https://rest.bandsintown.com/artists/" + artist + "?app_id=codingbootcamp";
+        var bandsInTown = "https://rest.bandsintown.com/artists/" + artist + "?app_id=codingbootcamp";
+        $('#artist-name').addClass('animate__animated animate__fadeInRight');
         $.ajax({
-            url: queryURL,
+            url: bandsInTown,
             method: "GET"
-        }).then(function(response) {
-            // console.log(response);
-            // Getting and pasting artist name into Jumbotron
-            $("#artist-name").text(response.name);
+        }).then(function(res1) {
+            console.log(res1);
 
-            // setting jumbotron artist background
-            var jumboImg = response.image_url;
+            // Getting and pasting artist name into Jumbotron
+            $("#artist-name").text(res1.name);
+            
+            
+            // Upcoming events Count
+            var upcomingEventCount = res1.upcoming_event_count;
+            if (upcomingEventCount === 0) {
+                $('#event-count').text('Sorry, this artist has no upcoming events');
+            }
+            else {
+                $('#event-count').text('Number of Upcoming Events: ' + upcomingEventCount);
+            }
+            
+            var jumboImg = res1.image_url;
             console.log(jumboImg);
             $('.jumbotron-image').attr('style', 'background-image:' + "url(" + jumboImg + ")");
-            
+
              // if artist has a fb page, a clickable fb icon will appear in the social tab and redirects you in a new tab
-            if (response.facebook_page_url === '') {
+            if (res1.facebook_page_url === '') {
                 console.log('No Facebook link available');
                 return;
             }
             else {
-                var fbURL = response.facebook_page_url;
+                var fbURL = res1.facebook_page_url;
                 console.log(fbURL);
                 $('#fb-logo').attr({
                     src:'imgs/fb-logo.jpg',
@@ -125,9 +136,7 @@ $(document).on('keypress',function(e) {
 });
 
 
-
-// Linking artists Twitter
-
+// Connecting artist twitter to social tab
 $(document).on('keypress',function(e) {
     if(e.which == 13) {
         var artist = encodeURIComponent($('.search').val().toLowerCase());
@@ -148,6 +157,7 @@ $(document).on('keypress',function(e) {
             // Creating Link to Artist Twitter
             if (dater.message.body.artist_list[0].artist.artist_twitter_url === '') {
                 console.log('No Twitter link Available');
+                $('#twitter-logo').empty();
                 return;
             }
             else {
@@ -159,6 +169,24 @@ $(document).on('keypress',function(e) {
                     height: 120
                 });
                 $('#twitter-logo').wrap($('<a />').attr({href:twitterURL, target:'_blank'})).parent();
+            }
+
+            // Artist Alias
+            var aliasArray = dater.message.body.artist_list[0].artist.artist_alias_list;
+            if (aliasArray === []) {
+                console.log('Artist has no known alias');
+                $('#alias-list').empty();
+                return;
+            }
+            else {
+                $('#alias-list').text('This artist may also go by: ');
+                $('#alias-list').attr('style', 'margin-bottom:8px');
+                for (elem of aliasArray) {
+                    var aliasName = $('<p>').text('- ' + elem.artist_alias);
+                    aliasName.attr('style', 'font-size:1rem'),
+                    aliasName.attr('style', 'padding:8px'),
+                    $('#alias-list').append(aliasName);
+                }
             }
 
         })
