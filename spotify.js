@@ -200,3 +200,4 @@ $(".relArtist").on("click", function(e) {
     console.log(relArtistSearch)
 });
 
+ 
