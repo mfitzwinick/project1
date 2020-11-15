@@ -32,7 +32,9 @@ if(timeDiff >= 1 || timeDiff < 0 || lastTokenTime === null) {
 // //on page load getAristData of localStorage(lastsearch)
 var artistSearch = localStorage.getItem("lastSearch");
 // console.log(artistSearch)
-getArtistData(artistSearch);
+if (artistSearch !== null) {
+    getArtistData(artistSearch);
+}
 
 //function to search artist
 function getArtistData(artistSearch) {

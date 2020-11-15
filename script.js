@@ -107,14 +107,24 @@ function getSocials(artist) {
         var dater = (JSON.parse(res2));
         console.log(dater);
         
+        if (dater.message.body.artist_list.length === 0) {
+            console.log('ham smells')
+            $('#alias-list').empty();
+            $('.alias').empty();
+            $('#twitter-logo').removeAttr('src width height');
+            return;
+        }
+        
         // Creating Link to Artist Twitter
-        if (dater.message.body.artist_list[0].artist.artist_twitter_url === '') {
+        var artistPage = dater.message.body.artist_list[0].artist;
+
+        if (artistPage.artist_twitter_url === '') {
             console.log('No Twitter link Available');
             $('#twitter-logo').removeAttr('src width height');
         }
         else {
             // $('#follow-artist').html('Follow ' + artist + ' on social media:');
-            var twitterURL = dater.message.body.artist_list[0].artist.artist_twitter_url;
+            var twitterURL = artistPage.artist_twitter_url;
             console.log(twitterURL);
             $('#twitter-logo').attr({
                 src:'imgs/twitter-logo.png',
@@ -125,11 +135,7 @@ function getSocials(artist) {
         }
         
         // Artist Alias
-        var aliasArray = dater.message.body.artist_list[0].artist.artist_alias_list;
-        if (dater.message.body.artist_list.length === 0) {
-            $('#alias-list').empty();
-            $('.alias').empty();
-        }
+        var aliasArray = artistPage.artist_alias_list;
         if (aliasArray.length === 0) {
             console.log('Artist has no known alias');
             $('#alias-list').empty();
@@ -137,7 +143,7 @@ function getSocials(artist) {
         }
         else {
             $('.alias').empty();
-            var artist = dater.message.body.artist_list[0].artist.artist_name;
+            var artist = artistPage.artist_name;
             $('#alias-list').text(artist + ' may also go by: ');
             for (elem of aliasArray) {
                 var aliasName = $('<li>').text(elem.artist_alias);
