@@ -29,6 +29,12 @@ if(timeDiff >= 1 || timeDiff < 0 || lastTokenTime === null) {
     getToken();
 }
 
+// //on page load getAristData of localStorage(lastsearch)
+var artistSearch = localStorage.getItem("lastSearch");
+// console.log(artistSearch)
+getArtistData(artistSearch);
+
+//function to search artist
 function getArtistData(artistSearch) {
     console.log(artistSearch)
     var queryURL1 = "https://api.spotify.com/v1/search?q=" + artistSearch + "&type=artist";
@@ -181,6 +187,7 @@ $(document).on('keypress',function(e) {
         if(artistSearch === "") {
             artistSearch = artistReg;
         }
+        localStorage.setItem('lastSearch', artistSearch);
         getArtistData(artistSearch);
     };
 });
@@ -188,7 +195,9 @@ $(document).on('keypress',function(e) {
 $(".relArtist").on("click", function(e) {
     e.preventDefault();
     var relArtistSearch = encodeURI($(this).text())
+    localStorage.setItem('lastSearch', relArtistSearch);
     getArtistData(relArtistSearch)
     console.log(relArtistSearch)
 });
 
+ 
