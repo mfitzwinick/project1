@@ -1,7 +1,7 @@
 
 # Musicology READ.ME
 
-# Description/Purpose
+## Description/Purpose
 
 Musicology is a clean interface tool for music fans who want to easily review an artists’ discography, social media and upcoming events.  It is also a resource for those fans who are seeking new music by providing similar artist suggestions.
 
@@ -30,6 +30,7 @@ The site also pulls from the following third-party APIs:
 - Bootstrap with Popper.js
 - Moment.js
 
+
 ## Features
 
 Musicology presents the user with a clean and simple UI home page that features a search input that allows the user to type in the artist of their choice.  The search button will redirect the user to a search result page that will populate with information about the requested artist.
@@ -47,7 +48,6 @@ The user can simply input an artist's name in order to get an output of their de
 On the search results page, there are three similar artist links that are clickable for additional information.  There are three clickable tabs that will provide discography, event and social media information.  The discography tab will feature the top 10 most popular songs in the U.S. and the artists' three most recent albums.  The events tab will populate with the number of upcoming events for that particular artist.  The social media links are clickable and will redirect to the artists' social media.  There is an additional search bar for subsequent searches.
 
 
-
 ## File Structure
 
 The site is built with two html pages: index.html (home page) and results.html (search results page).  
@@ -61,12 +61,30 @@ results.html is linked to:
 -  spotify.js 
 -  results.js
 
-
 The html skeletons are fairly simple including search inputs, buttons, image links, a jumbotron and tabs with content divs.
 
 
-# Examples/Screenshots
+## Examples/Screenshots
 
+### Home Page
+
+![Musicology Home Page](homePage.png)
+
+### Discography Tab
+
+![Musicology Results Page](discographyTab.png)
+
+### Events Tab
+
+![Musicology Events Page](eventsTab.png)
+
+### Social Tab
+
+![Musicology Social Page](socialTab.png)
+
+### Mobile Design
+
+![Musicology Mobile](responsive.png)
 
 
 ## Future Development
