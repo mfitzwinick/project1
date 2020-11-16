@@ -5,6 +5,22 @@
 
 .top-left {
     padding-top: 2rem;
+    padding-right: 2rem;
+    position: fixed;
+    width: 300px;
+}
+
+.similar-head {
+    position: fixed;
+}
+
+.similar-content {
+    margin-top: 2rem;
+    margin-left: -.8rem;
+    position: fixed;
+    width: auto;
+    height: 70%;
+    overflow-y: auto;
 }
 
 .artist-name {
@@ -61,7 +77,6 @@
     font-size: .8rem;
 }
 
-
 @media (max-width: 1199px) {
     .tabs-responsive {padding-left: 3rem;}
     .jumbo-responsive {padding-left: 3rem;}
@@ -116,7 +131,13 @@
 @media (min-width: 992px) {
     .similar-bottom-responsive {display: none;}
     .navbar {display:none;}
+    .margin-left {margin-left: 250px;}
 }
+
+@media (min-width: 1200px) {
+    .margin-left {margin-left: 350px;}
+}
+
 
 .popular {
     visibility: hidden;
