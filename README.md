@@ -67,9 +67,13 @@ The html skeletons are fairly simple including search inputs, buttons, image lin
 
 # Examples/Screenshots
 
+
+
 ## Future Development
 
 For future development:
-- The events tab will feature a more developed event calendar
+- The events tab will feature an event calendar
 - A user input page
-- 
+- Dark/light mode
+- A footer with an audio player
+- Hide double album listings in discography 
