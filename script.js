@@ -107,14 +107,23 @@ function getSocials(artist) {
         var dater = (JSON.parse(res2));
         console.log(dater);
         
+        if (dater.message.body.artist_list.length === 0) {
+            $('#alias-list').empty();
+            $('.alias').empty();
+            $('#twitter-logo').removeAttr('src width height');
+            return;
+        }
+        
         // Creating Link to Artist Twitter
-        if (dater.message.body.artist_list[0].artist.artist_twitter_url === '') {
+        var artistPage = dater.message.body.artist_list[0].artist;
+
+        if (artistPage.artist_twitter_url === '') {
             console.log('No Twitter link Available');
             $('#twitter-logo').removeAttr('src width height');
         }
         else {
             // $('#follow-artist').html('Follow ' + artist + ' on social media:');
-            var twitterURL = dater.message.body.artist_list[0].artist.artist_twitter_url;
+            var twitterURL = artistPage.artist_twitter_url;
             console.log(twitterURL);
             $('#twitter-logo').attr({
                 src:'imgs/twitter-logo.png',
@@ -125,11 +134,7 @@ function getSocials(artist) {
         }
         
         // Artist Alias
-        var aliasArray = dater.message.body.artist_list[0].artist.artist_alias_list;
-        if (dater.message.body.artist_list.length === 0) {
-            $('#alias-list').empty();
-            $('.alias').empty();
-        }
+        var aliasArray = artistPage.artist_alias_list;
         if (aliasArray.length === 0) {
             console.log('Artist has no known alias');
             $('#alias-list').empty();
@@ -137,7 +142,7 @@ function getSocials(artist) {
         }
         else {
             $('.alias').empty();
-            var artist = dater.message.body.artist_list[0].artist.artist_name;
+            var artist = artistPage.artist_name;
             $('#alias-list').text(artist + ' may also go by: ');
             for (elem of aliasArray) {
                 var aliasName = $('<li>').text(elem.artist_alias);
@@ -164,18 +169,25 @@ function getEvents(artist) {
         
         
         // Upcoming events Count
+        var bitURL = res1.url
         var upcomingEventCount = res1.upcoming_event_count;
+        $('#event-count').css({
+            'text-align':'center',
+            'margin-top':4
+        });
         if (upcomingEventCount === 0) {
             $('#event-count').text('Sorry, this artist currently has no upcoming events. Please check back later for the newest updates.');
-            $('#event-count').css({
-                'text-align':'center',
-                'margin-top':16
-            });
+            $('#event-info').text('For information about past events/ If you would like to sign up to receive updates from this artist - please click below')
         }
         else {
             $('#event-count').text('Number of Upcoming Events: ' + upcomingEventCount);
+            $('#event-info').text('To see upcoming events dates, locations, and ticket options - please click below')
+            
         }
-        
+        $('#bit-link').attr({
+            href:bitURL,
+            target:'_blank'
+        });
         var jumboImg = res1.image_url;
         // console.log(jumboImg);
         $('.jumbotron-image').attr('style', 'background: '+ "linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), " + "url(" + jumboImg + ")");
